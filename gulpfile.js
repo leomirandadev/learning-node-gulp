@@ -17,22 +17,18 @@ var data = {
 gulp.task('minifyall', gulp.series('css', 'jquery', 'scripts', 'img') );
 // tasks =================================================================
 gulp.task('scripts', function(){
-    return gulp.src(data.js.src)
-    .pipe( plumber() ).pipe( uglify() )
-    .pipe( concat(data.js.new_name) ).pipe( gulp.dest(data.js.dist) );
+    return gulp.src(data.js.src).pipe( plumber() ).pipe( uglify() )
+        .pipe( concat(data.js.new_name) ).pipe( gulp.dest(data.js.dist) );
 });
 gulp.task('css', function(){
-    return gulp.src(data.css.src)
-    .pipe( minify_css({keepSpecialComments: 1}) )
-    .pipe( concat(data.css.new_name) ).pipe( gulp.dest(data.css.dist) );
+    return gulp.src(data.css.src).pipe( minify_css({keepSpecialComments: 1}) )
+        .pipe( concat(data.css.new_name) ).pipe( gulp.dest(data.css.dist) );
 });
 gulp.task('img', function(){
-    return gulp.src(data.img.src)
-    .pipe( imagemin({progressive: true}) )
-    .pipe( gulp.dest(data.img.dist) );
+    return gulp.src(data.img.src).pipe(imagemin({progressive: true}))
+        .pipe(gulp.dest(data.img.dist));
 });
 gulp.task('jquery', function () {
-    return jquery.src({ release:2, flags:['-deprecated'] })
-    .pipe( plumber() ).pipe( uglify() )
-    .pipe( concat(data.jquery.new_name) ).pipe( gulp.dest(data.js.dist) );
+    return jquery.src({ release:2, flags:['-deprecated'] }).pipe(plumber()).pipe(uglify())
+        .pipe(concat(data.jquery.new_name)).pipe(gulp.dest(data.js.dist));
 });
